@@ -1,5 +1,5 @@
 function isCar(car1, car2, car3) {
-    // return 
+    return (car1 && car2 &&car3) || (!car1 && !car2 && !car3) ? true : false;
 }
 
 console.log(isCar(true, true, true));
