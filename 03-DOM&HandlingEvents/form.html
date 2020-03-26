@@ -18,6 +18,13 @@
 		// a JavaScript code here ...
 		var university = "Cracow University of Economics";
 		var address = "Rakowicka 27, Krakow, POLAND";
+		const button = document.getElementsByTagName("button").item(0);
+		button.onclick = () => {
+			const universityField = document.getElementsByTagName("input").item(0);
+			const addressField = document.getElementsByTagName("input").item(1);
+			universityField.value = university;
+			addressField.value = address;
+		};
 
 	</script>
 </body>

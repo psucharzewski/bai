@@ -23,8 +23,23 @@
 		<textarea rows="15" cols="50"></textarea><br>
 		
 		<script>
-			// a JavaScript code here ...
-			
+			const text = document.getElementsByTagName("textarea").item(0);
+			const result = () => {
+				if (check) {
+					check = false;
+					const typeText = text.value;
+					const numOfWords = typeText.split(" ").length;
+					const numOfCharacters = typeText.length;
+					const results = document.createElement("p");
+					const body = document.getElementsByTagName("body").item(0);
+
+					results.innerHTML = `Number of words:${numOfWords}, number of characters:${numOfCharacters}`
+					body.appendChild(results);
+				}
+			};
+
+			text.oninput = () => setTimeout(result, 30000);
+			let check = true;			
 		</script>
 		
 	</body>

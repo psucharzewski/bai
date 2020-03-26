@@ -3,11 +3,26 @@
 	<head>
 		<title>Create DOM elements</title>
 		<meta charset="UTF-8">
+
 	</head>
 	<body>
 		<script>
-			// a JavaScript code here ...
-			
+			const body = document.getElementsByTagName("body").item(0);
+			const table = document.createElement("table");
+			body.appendChild(table);
+			let number = 1;
+			for (let i = 0; i < 2; i++) {
+				let row = document.createElement("tr");
+				for (let j = 0; j < 2; j++) {
+					let cell = document.createElement("td");
+					cell.setAttribute('class', 'cell');
+					cell.innerHTML = number.toString();
+					cell.style.border = "1px solid black";
+					row.appendChild(cell);
+					number++;
+				}
+				table.appendChild(row);
+			}
 		</script>
 	</body>
 </html>

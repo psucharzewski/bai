@@ -20,7 +20,24 @@
     </ol>
 
     <script>
-    	// a JavaScript code here ...
+        const button = document.getElementsByTagName("button").item(0);
+        const shopingList = document.getElementsByTagName("ol").item(0);
+        const li = document.getElementsByTagName("li");
+
+        button.onclick = () => {
+            const item = document.createElement("li");
+            item.innerHTML = document.getElementsByName("item").item(0).value;
+            shopingList.appendChild(item);
+            $(item).dblclick(function() {
+                this.remove();
+            });
+        };
+
+        $(document).ready(function(){
+            $("li").dblclick(function() {
+                this.remove();
+            });
+        });
 
     </script>
 </body>
