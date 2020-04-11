@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Currency exchange</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+
+<h1>Currency exchange rates:</h1>
+<p id="eur"></p>
+<p id="usd"></p>
+<p id="gbp"></p>
+
+<script>
+    const currencies = ['eur', 'usd', 'gbp']
+
+    for (let i=0; i < currencies.length; i++) {
+        const URL = `http://api.nbp.pl/api/exchangerates/rates/a/${currencies[i]}/`;
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.status === 200 && this.readyState === 4) {
+                const {code, rates} = JSON.parse(this.response)
+                document.getElementById(code.toLowerCase()).innerHTML = `${code}: ${rates[0].mid} `
+            }
+        }
+        xhr.open('GET', URL)
+        xhr.send()
+    }
+
+</script>
+
+</body>
+</html>

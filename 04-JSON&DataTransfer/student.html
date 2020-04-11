@@ -11,7 +11,22 @@
 		<p id="personalData"></p>
 
 		<script>
-
+			const button = document.getElementsByTagName('input').item(0);
+			button.onclick = () =>{
+				const method = "GET";
+				const URL ="http://0.0.0.0:8001/myData.json";
+				const xht = new XMLHttpRequest();
+				xht.responseType = 'json';
+				xht.onreadystatechange = function () {
+					if(this.status === 200 && this.readyState === 4) {
+						const personalDataElement =document.getElementById('personalData')
+						const {firstName,lastName} =JSON.parse(this.response)
+						personalDataElement.innerHTML = `First Name: ${firstname} <br> LastName: ${lastname}`
+					}
+				}
+				xht.open(method, URL)
+				xht.send()
+				}
 		</script>
 
 	</body>

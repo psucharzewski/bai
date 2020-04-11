@@ -23,6 +23,7 @@
 				console.log("Status:", r.status);
 				console.log("Status text:", r.statusText);
 				console.log("-----");
+				(r.status === 200) && (r.readyState === 4) ? console.log(r.response) : ''
 			};
 		</script>
 

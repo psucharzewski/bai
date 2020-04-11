@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chart Gold Price</title>
+    <meta charset="UTF-8">
+    <script src='https://code.jquery.com/jquery-3.3.1.js'></script>
+    <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+</head>
+<body>
+<h1>Chart Gold Price</h1>
+<div>
+    <canvas id="myChart" width="100" height="100"></canvas>
+</div>
+
+<script>
+    $(document).ready(function(){
+        const method = 'GET';
+        const URL = 'http://api.nbp.pl/api/cenyzlota/last/10';
+        const xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function(){
+            if(this.status === 200 && this.readyState === 4){
+                const dates = [];
+                const prices = [];
+                const response = JSON.parse(this.response)
+
+                for(let i=0; i<response.length; i++){
+                    const {data, cena} = response[i]
+                    dates.push(data)
+                    prices.push(cena)
+                }
+
+                const ctx = document.getElementById("myChart");
+                const data = {
+                    labels: dates,
+                    datasets: [{
+                        label: "Gold price",
+                        data: prices,
+                        backgroundColor: 'rgba(255, 110, 100, 1)',
+                    }]
+                }
+                const options = {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+                new Chart(ctx, {
+                    type: 'bar',
+                    data,
+                    options
+                });
+            }
+        };
+        xhr.open(method, URL);
+        xhr.send();
+    });
+</script>
+
+</body>
+</html>
