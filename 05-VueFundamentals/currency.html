@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+<body>
+<div id="app">
+    <table>
+        <tr>
+            <th>Currency</th>
+            <th>Code</th>
+            <th>Mid</th>
+        </tr>
+        <tr v-for="response in responses">
+            <td>{{response.currency}}</td>
+            <td>{{response.code}}</td>
+            <td>{{response.mid}}</td>
+        </tr>
+    </table>
+</div>
+<script>
+
+    const app = new Vue({
+        el: '#app',
+        data: {
+            responses: []
+        },
+        mounted() {
+            let self = this;
+            fetch('http://api.nbp.pl/api/exchangerates/tables/A/')
+                .then(response => {
+                    return response.json()
+                })
+                .then(response => {
+                    self.responses =JSON.parse(JSON.stringify(response))[0].rates
+                })
+        }
+    });
+
+</script>
+
+<style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, th, td {
+        border: black solid 1px;
+        padding: 4px;
+    }
+
+    table td {
+        width: 200px;
+    }
+
+    table th {
+        text-align: left;
+        font-weight: bold;
+    }
+</style>
+</body>
+</html>
